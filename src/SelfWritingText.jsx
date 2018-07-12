@@ -11,16 +11,19 @@ class Swt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      textMajorIn: 'I am the major text',
       textMajorOut: '',
       textMajorIndex: 0,
+      isVBarMajorHidden: false,
       isMajorFinished: false,
-      willMajorFreeze: true,
-      textIn: ['Animated text', 'Text number 2', 'Words, words, words'],
       textOut: '',
       textIndex: 0,
-      willFreeze: true,
-      writingInterval: 200
+      isVBarHidden: true,
+      // to be props
+      textMajorIn: 'Lorem ipsum dolor sit',
+      textIn: ['amet consectetur adipisicing elit.', 'Minima sequi facilis quisquam', 'explicabo pariatur velit.'],
+      willFreeze: false,
+      writingInterval: 50,
+      pendingTime: 1000,
     }
   }
 
@@ -37,18 +40,27 @@ class Swt extends React.Component {
           })
         } else {
           clearInterval(this.majorInterval);
-          this.animateText(0);
+          this.setState({
+            isVBarMajorHidden: !this.state.isVBarMajorHidden,
+            isVBarHidden: !this.state.isVBarHidden
+          })
+          this.timer = setTimeout(() => {this.animateText(0)}, this.state.pendingTime);
+          
         }
       }, this.state.writingInterval);
     };
 
     this.animateText = (index) => {
+      let indexNum = parseInt(index);
+      
+      clearTimeout(this.timer);
       this.setState({
         textOut: '',
         textIndex: 0
       })
+
       this.interval = setInterval(() => {
-        const text = this.state.textIn[index];
+        const text = this.state.textIn[indexNum];
         if(this.state.textOut.length < text.length) {
           this.setState({
             textIndex: this.state.textIndex + 1,
@@ -60,11 +72,12 @@ class Swt extends React.Component {
           return null;
         }
         clearInterval(this.interval);
-        if(index + 1 === this.state.textIn.length && this.state.willFreeze) {
+        if(indexNum + 1 === this.state.textIn.length && this.state.willFreeze) {
           return null;
         }
-        let nextIndex = index < this.state.textIn.length ? index + 1 : 0;
-        this.animateText(nextIndex);
+        
+        let nextIndex = ((indexNum + 1 < this.state.textIn.length) ? indexNum + 1 : 0);
+        this.timer = setTimeout(() => {this.animateText(nextIndex)}, this.state.pendingTime);
       }, this.state.writingInterval)
     }
     this.animateMajorText();
@@ -73,13 +86,20 @@ class Swt extends React.Component {
   componentWillUnmount() {
     clearInterval(this.majorInterval);
     clearInterval(this.interval);
+    clearTimeout(this.timer)
   }
   
   render() {
     return(
       <div>
-        <p>{this.state.textMajorOut}<span>|</span></p>
-        <p>{this.state.textOut}<span>|</span></p>
+        <p>
+          {this.state.textMajorOut}
+          {!this.state.isVBarMajorHidden && <span>|</span>}
+        </p>
+        <p>
+          {this.state.textOut}
+          {!this.state.isVBarHidden && <span>|</span>}
+        </p>
       </div>
     )
   }
