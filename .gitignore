@@ -65,3 +65,6 @@ typings/
 
 #archives
 /archive/*
+
+#tests
+__tests__

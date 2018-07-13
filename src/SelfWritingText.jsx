@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
  * 
  * @author [Michał Zawadzki](https://github.com/emzawadzki/)
  */
-class Swt extends React.Component {
+export default class Swt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,25 +17,19 @@ class Swt extends React.Component {
       isMajorFinished: false,
       textOut: '',
       textIndex: 0,
-      isVBarHidden: true,
-      // to be props
-      textMajorIn: 'Lorem ipsum dolor sit',
-      textIn: ['amet consectetur adipisicing elit.', 'Minima sequi facilis quisquam', 'explicabo pariatur velit.'],
-      willFreeze: false,
-      writingInterval: 50,
-      pendingTime: 1000,
+      isVBarHidden: true
     }
   }
 
   componentDidMount() {
     this.animateMajorText = () => {
       this.majorInterval = setInterval(() => {
-        if(this.state.textMajorOut.length < this.state.textMajorIn.length) {
+        if(this.state.textMajorOut.length < this.props.textMajorIn.length) {
           this.setState({
             textMajorIndex: this.state.textMajorIndex + 1,
           }, () => {
             this.setState({
-              textMajorOut: this.state.textMajorIn.slice(0, this.state.textMajorIndex)
+              textMajorOut: this.props.textMajorIn.slice(0, this.state.textMajorIndex)
             })
           })
         } else {
@@ -44,10 +38,10 @@ class Swt extends React.Component {
             isVBarMajorHidden: !this.state.isVBarMajorHidden,
             isVBarHidden: !this.state.isVBarHidden
           })
-          this.timer = setTimeout(() => {this.animateText(0)}, this.state.pendingTime);
+          this.timer = setTimeout(() => {this.animateText(0)}, this.props.pendingTime);
           
         }
-      }, this.state.writingInterval);
+      }, this.props.writingInterval);
     };
 
     this.animateText = (index) => {
@@ -60,7 +54,7 @@ class Swt extends React.Component {
       })
 
       this.interval = setInterval(() => {
-        const text = this.state.textIn[indexNum];
+        const text = this.props.textIn[indexNum];
         if(this.state.textOut.length < text.length) {
           this.setState({
             textIndex: this.state.textIndex + 1,
@@ -72,13 +66,13 @@ class Swt extends React.Component {
           return null;
         }
         clearInterval(this.interval);
-        if(indexNum + 1 === this.state.textIn.length && this.state.willFreeze) {
+        if(indexNum + 1 === this.props.textIn.length && this.props.willFreeze) {
           return null;
         }
         
-        let nextIndex = ((indexNum + 1 < this.state.textIn.length) ? indexNum + 1 : 0);
-        this.timer = setTimeout(() => {this.animateText(nextIndex)}, this.state.pendingTime);
-      }, this.state.writingInterval)
+        let nextIndex = ((indexNum + 1 < this.props.textIn.length) ? indexNum + 1 : 0);
+        this.timer = setTimeout(() => {this.animateText(nextIndex)}, this.props.pendingTime);
+      }, this.props.writingInterval)
     }
     this.animateMajorText();
   }
@@ -105,18 +99,37 @@ class Swt extends React.Component {
   }
 }
 
-class App extends React.Component {
-  render() {
-    return (
-      <Swt/>
-    )
-  }
+Swt.PropTypes = {
+  /**
+   * String to be written in first line
+   */
+  textMajorIn: PropTypes.string.isRequired,
+  /**
+   * Array of strings to be written in second line
+   */
+  textIn: PropTypes.arrayOf(PropTypes.string).isRequired,
+  /**
+   * Boolean value: 
+   * true stops changing text in a second line when reaches last
+   * false makes line changing infinitely
+   * optional - true by default
+   */
+  willFreeze: PropTypes.bool,
+  /**
+   * Number value of ms between letters typed
+   * optional - 100ms by default
+   */
+  writingInterval: PropTypes.number,
+  /**
+   * Number value of ms between sentences (lines) changes
+   * optional - 1000ms by default
+   */
+  pendingTime: PropTypes.number,
+
 }
 
-document.addEventListener('DOMContentLoaded', function(){
-   ReactDOM.render(
-       <App />,
-       document.getElementById('app')
-   );
-})
-
+Swt.defaultProps = {
+  willFreeze: true,
+  writingInterval: 100,
+  pendingTime: 1000
+}
