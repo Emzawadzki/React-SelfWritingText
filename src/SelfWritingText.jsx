@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 /**
@@ -32,15 +31,15 @@ export default class Swt extends React.Component {
               textMajorOut: this.props.textMajorIn.slice(0, this.state.textMajorIndex)
             })
           })
-        } else {
-          clearInterval(this.majorInterval);
-          this.setState({
-            isVBarMajorHidden: !this.state.isVBarMajorHidden,
-            isVBarHidden: !this.state.isVBarHidden
-          })
-          this.timer = setTimeout(() => {this.animateText(0)}, this.props.pendingTime);
-          
+          return null;
         }
+        clearInterval(this.majorInterval);
+        this.setState({
+          isVBarMajorHidden: !this.state.isVBarMajorHidden,
+          isVBarHidden: !this.state.isVBarHidden
+        })
+        this.timer = setTimeout(() => {this.animateText(0)}, this.props.pendingTime);
+          
       }, this.props.writingInterval);
     };
 
@@ -84,15 +83,19 @@ export default class Swt extends React.Component {
   }
   
   render() {
+    if(!this.props.textMajorIn || !this.props.textIn) {
+      return null;
+    }
+    
     return(
-      <div>
-        <p>
+      <div className={this.props.class}>
+        <p className={this.props.class + "__line"}>
           {this.state.textMajorOut}
-          {!this.state.isVBarMajorHidden && <span>|</span>}
+          {!this.state.isVBarMajorHidden && <span className={this.props.class + "__v-bar"}>|</span>}
         </p>
-        <p>
+        <p className={this.props.class + "__line"}>
           {this.state.textOut}
-          {!this.state.isVBarHidden && <span>|</span>}
+          {!this.state.isVBarHidden && <span className={this.props.class + "__v-bar"}>|</span>}
         </p>
       </div>
     )
@@ -125,11 +128,18 @@ Swt.PropTypes = {
    * optional - 1000ms by default
    */
   pendingTime: PropTypes.number,
+  /**
+   * Class of DOM container element, accepts string with class name (e.g. "my-fancy-class").
+   * Set as self-writing-text by default for parent.
+   * Nested (p) elements class set as [parent-class]__line
+   * Nested v-bar elements class set as [parent-class]__v-bar
+   */
 
 }
 
 Swt.defaultProps = {
   willFreeze: true,
   writingInterval: 100,
-  pendingTime: 1000
+  pendingTime: 1000,
+  class: "self-writing-text"
 }
