@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Swt from '../src/SelfWritingText.jsx';
+import './example.css';
 
 class App extends React.Component {
   render() {
     return (
       <Swt 
-        textMajorIn={'Lorem ipsum dolor sit'}
-        textIn={['amet consectetur adipisicing elit.', 'Minima sequi facilis quisquam', 'explicabo pariatur velit.']}
-        willFreeze={false}
+        textMajorIn={'This is a Self Writing Text Component.'}
+        textIn={['It can write.', 'More than one line.', 'It can even freeze text.']}
+        willFreeze={true}
         writingInterval={200}
         pendingTime={1000}
       />

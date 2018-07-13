@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open sans', sans-serif;
+}
+
+.self-writing-text {
+  margin: 30px;
+  font-size: 3.25rem;
+  color: #33315A;
+}
+
+.self-writing-text__v-bar {
+  animation: blink 0.8s infinite;
+  color: #F5B521;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
+}
