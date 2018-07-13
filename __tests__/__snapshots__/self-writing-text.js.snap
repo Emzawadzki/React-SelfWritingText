@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering tests: Renders correctly with props 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Swt
+    class="myclass"
+    pendingTime={1000}
+    textIn={
+      Array [
+        "testText1",
+        "testText2",
+        "testText3",
+      ]
+    }
+    textMajorIn="testingText"
+    willFreeze={true}
+    writingInterval={100}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <p
+          className="myclass__line"
+        >
+          
+          <span
+            className="myclass__v-bar"
+          >
+            |
+          </span>
+        </p>,
+        <p
+          className="myclass__line"
+        >
+          
+        </p>,
+      ],
+      "className": "myclass",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "",
+            <span
+              className="myclass__v-bar"
+            >
+              |
+            </span>,
+          ],
+          "className": "myclass__line",
+        },
+        "ref": null,
+        "rendered": Array [
+          "",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "|",
+              "className": "myclass__v-bar",
+            },
+            "ref": null,
+            "rendered": "|",
+            "type": "span",
+          },
+        ],
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "",
+            false,
+          ],
+          "className": "myclass__line",
+        },
+        "ref": null,
+        "rendered": Array [
+          "",
+          false,
+        ],
+        "type": "p",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <p
+            className="myclass__line"
+          >
+            
+            <span
+              className="myclass__v-bar"
+            >
+              |
+            </span>
+          </p>,
+          <p
+            className="myclass__line"
+          >
+            
+          </p>,
+        ],
+        "className": "myclass",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "",
+              <span
+                className="myclass__v-bar"
+              >
+                |
+              </span>,
+            ],
+            "className": "myclass__line",
+          },
+          "ref": null,
+          "rendered": Array [
+            "",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "|",
+                "className": "myclass__v-bar",
+              },
+              "ref": null,
+              "rendered": "|",
+              "type": "span",
+            },
+          ],
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "",
+              false,
+            ],
+            "className": "myclass__line",
+          },
+          "ref": null,
+          "rendered": Array [
+            "",
+            false,
+          ],
+          "type": "p",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactFifteenAdapter {
+      "options": Object {
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "prevContext": true,
+          },
+        },
+        "supportPrevContextArgumentOfComponentDidUpdate": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`Rendering tests: Renders nothing without required props 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Swt
+    class="self-writing-text"
+    pendingTime={1000}
+    willFreeze={true}
+    writingInterval={100}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): null,
+  Symbol(enzyme.__nodes__): Array [
+    null,
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactFifteenAdapter {
+      "options": Object {
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "prevContext": true,
+          },
+        },
+        "supportPrevContextArgumentOfComponentDidUpdate": true,
+      },
+    },
+  },
+}
+`;
