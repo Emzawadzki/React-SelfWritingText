@@ -49,7 +49,6 @@ export default class Swt extends React.Component {
       textMajorOut: '',
       textMajorIndex: 0,
       isVBarMajorHidden: false,
-      isMajorFinished: false,
       textOut: '',
       textIndex: 0,
       isVBarHidden: true
