@@ -2,11 +2,47 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * Self Writing Text
+ * # Self Writing Text
+ * 
+ * ### [LIVE EXAMPLE](https://emzawadzki.github.io/React-SelfWritingText/example/)
  * 
  * @author [Michał Zawadzki](https://github.com/emzawadzki/)
  */
 export default class Swt extends React.Component {
+  static propTypes = {
+    /**
+     * String to be written in first line
+     */
+    textMajorIn: PropTypes.string.isRequired,
+    /**
+     * Array of strings to be written in second line
+     */
+    textIn: PropTypes.arrayOf(PropTypes.string).isRequired,
+    /**
+     * Boolean value: true - stops changing text in a second line when reaches last; false - makes line changing infinitely
+     */
+    willFreeze: PropTypes.bool,
+    /**
+     * Number value of ms between letters typed
+     */
+    writingInterval: PropTypes.number,
+    /**
+     * Number value of ms between sentences (lines) changes
+     */
+    pendingTime: PropTypes.number,
+    /**
+     * Class of DOM container element, accepts string with class name (e.g. "my-fancy-class"). Nested P elements classes set as [parent-class]__line; nested v-bar elements classes set as [parent-class]__v-bar
+     */
+    class: PropTypes.string
+  }
+
+  static defaultProps = {
+    willFreeze: true,
+    writingInterval: 100,
+    pendingTime: 1000,
+    class: "self-writing-text"
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -100,46 +136,4 @@ export default class Swt extends React.Component {
       </div>
     )
   }
-}
-
-Swt.PropTypes = {
-  /**
-   * String to be written in first line
-   */
-  textMajorIn: PropTypes.string.isRequired,
-  /**
-   * Array of strings to be written in second line
-   */
-  textIn: PropTypes.arrayOf(PropTypes.string).isRequired,
-  /**
-   * Boolean value: 
-   * true stops changing text in a second line when reaches last
-   * false makes line changing infinitely
-   * optional - true by default
-   */
-  willFreeze: PropTypes.bool,
-  /**
-   * Number value of ms between letters typed
-   * optional - 100ms by default
-   */
-  writingInterval: PropTypes.number,
-  /**
-   * Number value of ms between sentences (lines) changes
-   * optional - 1000ms by default
-   */
-  pendingTime: PropTypes.number,
-  /**
-   * Class of DOM container element, accepts string with class name (e.g. "my-fancy-class").
-   * Set as self-writing-text by default for parent.
-   * Nested (p) elements class set as [parent-class]__line
-   * Nested v-bar elements class set as [parent-class]__v-bar
-   */
-
-}
-
-Swt.defaultProps = {
-  willFreeze: true,
-  writingInterval: 100,
-  pendingTime: 1000,
-  class: "self-writing-text"
 }

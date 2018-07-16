@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Swt from '../src/SelfWritingText.jsx';
+import Swt from '../src/components/SelfWritingText.jsx';
 import './example.css';
 
 class App extends React.Component {

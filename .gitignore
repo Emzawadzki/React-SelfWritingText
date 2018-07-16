@@ -62,6 +62,7 @@ typings/
 
 #lock files
 *.lock
+*-lock.json
 
 #archives
 /archive/*

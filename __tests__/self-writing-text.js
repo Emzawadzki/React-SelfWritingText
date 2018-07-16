@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Swt from '../src/SelfWritingText.jsx';
+import Swt from '../src/components/SelfWritingText.jsx';
 
 describe('Rendering tests:', () => {
   it('Renders nothing without required props', () => {

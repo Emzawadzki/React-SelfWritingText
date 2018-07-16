@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack",
-    "test": "jest"
+    "test": "jest",
+    "doc": "./node_modules/.bin/react-doc-generator ./src -o README.md"
   },
   "author": "",
   "license": "",
@@ -26,6 +27,8 @@
     "jest-runtime": "^23.4.1",
     "prop-types": "^15.6.2",
     "react": "^15.4.0",
+    "react-doc-generator": "^1.2.5",
+    "react-docgen": "^2.21.0",
     "react-dom": "^15.4.0",
     "react-test-renderer": "15.6.2",
     "style-loader": "^0.21.0",
